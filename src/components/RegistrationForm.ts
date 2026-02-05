@@ -1,4 +1,4 @@
-import { showToast, showConfirmation, updateAgeGroup, setButtonLoading } from "../utils";
+import { showToast, showConfirmation, updateAgeGroup, setButtonLoading, saveUserId } from "../utils";
 import { api } from "../api";
 import { validateRegistration } from "../types";
 import type { CreateUserRequest } from "../types";
@@ -422,6 +422,7 @@ export function setupRegistrationForm(onSuccess: (userId: string) => void): void
 			setButtonLoading(submitBtn, true, "Submitting...");
 			const response = await api.createUser(registrationData);
 			if (response.success && response.user) {
+				saveUserId(response.user.user_id);
 				showToast(`✓ Registration successful! Your ID is: ${response.user.user_id}`);
 				form.reset();
 				const ageGroupDisplay = document.getElementById("ageGroupDisplay");

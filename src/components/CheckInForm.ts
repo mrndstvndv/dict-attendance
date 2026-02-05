@@ -1,4 +1,4 @@
-import { showToast, showConfirmation, setButtonLoading } from "../utils";
+import { showToast, showConfirmation, setButtonLoading, loadUserId, saveUserId } from "../utils";
 import { api } from "../api";
 import { validateCheckIn } from "../types";
 import type { LogEntryRequest, Service } from "../types";
@@ -87,6 +87,11 @@ export function setupCheckInForm(): void {
 	const form = document.getElementById("loginForm") as HTMLFormElement;
 	const userIdInput = document.getElementById("loginUserId") as HTMLInputElement;
 
+	const savedUserId = loadUserId();
+	if (savedUserId && !userIdInput.value) {
+		userIdInput.value = savedUserId;
+	}
+
 	// Convert to uppercase
 	userIdInput?.addEventListener("input", () => {
 		userIdInput.value = userIdInput.value.toUpperCase();
@@ -140,8 +145,10 @@ export function setupCheckInForm(): void {
 			setButtonLoading(loginBtn, true, "Checking in...");
 			const response = await api.logEntry(checkInData);
 			if (response.success) {
+				saveUserId(userId);
 				showToast(`✓ Check-in successful! Services: ${services.join(", ")}`);
 				form.reset();
+				setCheckInUserId(userId);
 			} else {
 				showToast(response.error || "Check-in failed", "error");
 			}

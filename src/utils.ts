@@ -1,5 +1,23 @@
 // Utility functions
 
+const USER_ID_STORAGE_KEY = "dict:userId";
+
+export function saveUserId(userId: string): void {
+	try {
+		localStorage.setItem(USER_ID_STORAGE_KEY, userId);
+	} catch {
+		// Ignore storage failures (private mode, quota, etc.)
+	}
+}
+
+export function loadUserId(): string | null {
+	try {
+		return localStorage.getItem(USER_ID_STORAGE_KEY);
+	} catch {
+		return null;
+	}
+}
+
 export function showToast(message: string, type: "success" | "error" = "success"): void {
 	const container = document.getElementById("toastContainer");
 	if (!container) return;

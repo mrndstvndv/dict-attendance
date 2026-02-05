@@ -6,7 +6,8 @@ import { CheckInForm, setupCheckInForm, setCheckInUserId } from "./components/Ch
 import { QRScanner, setupQRScanner, checkUrlParams } from "./components/QRScanner";
 import { AdminDashboard, setupAdminDashboard } from "./components/AdminDashboard";
 import { showRegistrationComplete } from "./components/RegistrationSuccess";
-import { switchTab } from "./utils";
+import { switchTab, loadUserId } from "./utils";
+import { validateUserId } from "./types";
 
 function renderApp(): void {
 	const app = document.getElementById("app");
@@ -59,6 +60,13 @@ function renderApp(): void {
 	if (autoFillUserId) {
 		switchTab("login");
 		setCheckInUserId(autoFillUserId);
+		return;
+	}
+
+	const savedUserId = loadUserId();
+	if (savedUserId && validateUserId(savedUserId)) {
+		switchTab("login");
+		setCheckInUserId(savedUserId);
 	}
 }
 
