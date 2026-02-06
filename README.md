@@ -8,7 +8,7 @@ This project is configured for automatic deployment to GitHub Pages.
 
 ### Setup Instructions
 
-1. **Create a new repository** on GitHub named `dict-attendance`
+1. **Create a new repository** on GitHub named `dtc`
 
 2. **Push this code** to the repository:
    ```bash
@@ -16,7 +16,7 @@ This project is configured for automatic deployment to GitHub Pages.
    git add .
    git commit -m "Initial commit"
    git branch -M main
-   git remote add origin https://github.com/mrndstvndv/dict-attendance.git
+   git remote add origin https://github.com/dict-ojt/dtc.git
    git push -u origin main
    ```
 
@@ -26,7 +26,7 @@ This project is configured for automatic deployment to GitHub Pages.
    - Under **Build and deployment**, set **Source** to **GitHub Actions**
 
 4. **Your site will be deployed** at:
-   `https://mrndstvndv.github.io/dict-attendance/`
+   `https://dict-ojt.github.io/dtc/`
 
 ### Development
 
@@ -64,7 +64,7 @@ frontend/
 
 ### Configuration Notes
 
-- **Base Path**: Configured in `vite.config.ts` as `/dict-attendance/` for project site deployment
+- **Base Path**: Configured in `vite.config.ts` as `/dtc/` for project site deployment
 - **Build Output**: The `dist` folder is deployed to GitHub Pages
 - **Auto-deployment**: Pushes to `main` branch trigger automatic deployment
 
